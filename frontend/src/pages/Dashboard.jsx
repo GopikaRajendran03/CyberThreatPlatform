@@ -21,6 +21,32 @@ function Dashboard() {
           <h2 style={{ color: "#00bcd4" }}>22</h2>
         </div>
       </div>
+
+      {/* Recent Security Alerts */}
+
+      <div
+        style={{
+          marginTop: "40px",
+          background: "#112240",
+          padding: "20px",
+          borderRadius: "10px",
+        }}
+      >
+        <h2 style={{ color: "white" }}>Recent Security Alerts</h2>
+
+        <p style={{ color: "#ff5252" }}>
+          ⚠ Phishing URL detected from unknown domain
+        </p>
+
+        <p style={{ color: "#ffb300" }}>
+          ⚠ Multiple failed login attempts detected
+        </p>
+
+        <p style={{ color: "#00bcd4" }}>
+          ℹ Suspicious IP activity monitored
+        </p>
+      </div>
+
     </div>
   );
 }
