@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 function Dashboard() {
+  const navigate = useNavigate();
   return (
     <div style={{ padding: "30px", background: "#0a192f", minHeight: "100vh", color: "white" }}>
       <h1 style={{ color: "white", fontSize: "42px", marginBottom: "30px" }}>
@@ -46,6 +48,63 @@ function Dashboard() {
           ℹ Suspicious IP activity monitored
         </p>
       </div>
+      <div style={{
+  marginTop: "30px",
+  display: "flex",
+  gap: "15px",
+  flexWrap: "wrap"
+}}>
+  <button
+    onClick={() => navigate("/scanner")}
+    style={{
+      padding: "12px 20px",
+      background: "#00bcd4",
+      border: "none",
+      borderRadius: "5px",
+      cursor: "pointer"
+    }}
+  >
+    🔍 Scan URL
+  </button>
+
+  <button
+    style={{
+      padding: "12px 20px",
+      background: "#112240",
+      color: "white",
+      border: "1px solid #00bcd4",
+      borderRadius: "5px"
+    }}
+  >
+    📊 Threat Logs
+  </button>
+
+  <button
+    style={{
+      padding: "12px 20px",
+      background: "#112240",
+      color: "white",
+      border: "1px solid #00bcd4",
+      borderRadius: "5px"
+    }}
+  >
+    🚨 Security Alerts
+  </button>
+
+  <button
+    onClick={() => navigate("/")}
+    style={{
+      padding: "12px 20px",
+      background: "#ff4d4d",
+      color: "white",
+      border: "none",
+      borderRadius: "5px",
+      cursor: "pointer"
+    }}
+  >
+    🚪 Logout
+  </button>
+</div>
 
     </div>
   );
