@@ -15,6 +15,9 @@ function Scanner() {
 
     const data = await response.json();
     setResult(data);
+    const oldLogs = JSON.parse(localStorage.getItem("threatLogs")) || [];
+const newLogs = [...oldLogs, data];
+localStorage.setItem("threatLogs", JSON.stringify(newLogs));
   };
 
   return (
