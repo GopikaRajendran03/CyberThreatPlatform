@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import ThreatPieChart from "../components/ThreatPieChart";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -177,6 +178,17 @@ function Dashboard() {
           <h2 style={{ color: "#ffb300" }}>{suspiciousCount}</h2>
         </div>
       </div>
+      {/* Pie Chart */}
+
+<div style={{ marginTop: "40px" }}>
+  <ThreatPieChart
+    safeCount={safeCount}
+    phishingCount={phishingCount}
+    suspiciousCount={suspiciousCount}
+  />
+</div>
+
+{/* Navigation Buttons */}
 
       {/* Navigation Buttons */}
 
@@ -216,16 +228,18 @@ function Dashboard() {
         </button>
 
         <button
-          style={{
-            padding: "12px 20px",
-            background: "#112240",
-            color: "white",
-            border: "1px solid #00bcd4",
-            borderRadius: "5px",
-          }}
-        >
-          🚨 Security Alerts
-        </button>
+  onClick={() => navigate("/alerts")}
+  style={{
+    padding: "12px 20px",
+    background: "#112240",
+    color: "white",
+    border: "1px solid #00bcd4",
+    borderRadius: "5px",
+    cursor: "pointer"
+  }}
+>
+  🚨 Security Alerts
+</button>
 
         <button
           onClick={() => navigate("/")}

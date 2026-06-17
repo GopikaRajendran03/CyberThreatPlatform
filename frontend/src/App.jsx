@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Scanner from "./pages/Scanner";
 import ThreatLogs from "./pages/ThreatLogs";
+import SecurityAlerts from "./pages/SecurityAlerts";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/scanner" element={<Scanner />} />
         <Route path="/threat-logs" element={<ThreatLogs />} />
+        <Route path="/alerts" element={<SecurityAlerts />} />
       </Routes>
     </BrowserRouter>
   );
