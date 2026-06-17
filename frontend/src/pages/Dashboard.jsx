@@ -68,16 +68,18 @@ function Dashboard() {
   </button>
 
   <button
-    style={{
-      padding: "12px 20px",
-      background: "#112240",
-      color: "white",
-      border: "1px solid #00bcd4",
-      borderRadius: "5px"
-    }}
-  >
-    📊 Threat Logs
-  </button>
+  onClick={() => navigate("/threat-logs")}
+  style={{
+    padding: "12px 20px",
+    background: "#112240",
+    color: "white",
+    border: "1px solid #00bcd4",
+    borderRadius: "5px",
+    cursor: "pointer"
+  }}
+>
+  📊 Threat Logs
+</button>
 
   <button
     style={{
