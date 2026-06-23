@@ -1,5 +1,14 @@
+import { useEffect, useState } from "react";
+
 function ThreatLogs() {
-  const logs = JSON.parse(localStorage.getItem("threatLogs")) || [];
+  const [logs, setLogs] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/threat-logs")
+      .then((response) => response.json())
+      .then((data) => setLogs(data))
+      .catch((error) => console.error("Error fetching logs:", error));
+  }, []);
 
   return (
     <div style={{ minHeight: "100vh", background: "#0a192f", color: "white", padding: "40px" }}>
@@ -13,14 +22,30 @@ function ThreatLogs() {
             <th style={{ padding: "15px", border: "1px solid #00bcd4" }}>Risk Score</th>
           </tr>
         </thead>
+
         <tbody>
-          {logs.map((log, index) => (
-            <tr key={index}>
+          {logs.map((log) => (
+            <tr key={log.id}>
               <td style={{ padding: "15px", border: "1px solid #00bcd4" }}>{log.url}</td>
-              <td style={{ padding: "15px", border: "1px solid #00bcd4", color: log.result === "PHISHING" ? "#ff4d4d" : "#00ff7f" }}>
+
+              <td
+                style={{
+                  padding: "15px",
+                  border: "1px solid #00bcd4",
+                  color:
+                    log.result === "PHISHING"
+                      ? "#ff4d4d"
+                      : log.result === "SUSPICIOUS"
+                      ? "#ffb300"
+                      : "#00ff7f",
+                }}
+              >
                 {log.result}
               </td>
-              <td style={{ padding: "15px", border: "1px solid #00bcd4" }}>{log.risk_score}</td>
+
+              <td style={{ padding: "15px", border: "1px solid #00bcd4" }}>
+                {log.risk_score}
+              </td>
             </tr>
           ))}
         </tbody>
