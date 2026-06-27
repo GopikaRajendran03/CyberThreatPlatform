@@ -143,6 +143,29 @@ def get_threat_logs():
 
     return jsonify(logs), 200
 
+@app.route("/dashboard-stats", methods=["GET"])
+def dashboard_stats():
+
+    total_scans = threat_collection.count_documents({})
+
+    phishing = threat_collection.count_documents({
+        "result": "PHISHING"
+    })
+
+    suspicious = threat_collection.count_documents({
+        "result": "SUSPICIOUS"
+    })
+
+    safe = threat_collection.count_documents({
+        "result": "SAFE"
+    })
+
+    return jsonify({
+        "total_scans": total_scans,
+        "phishing": phishing,
+        "suspicious": suspicious,
+        "safe": safe
+    })
 
 if __name__ == "__main__":
     app.run(debug=False)

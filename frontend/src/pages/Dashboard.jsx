@@ -1,24 +1,24 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ThreatPieChart from "../components/ThreatPieChart";
 
 function Dashboard() {
   const navigate = useNavigate();
+  const [stats, setStats] = useState({
+  total_scans: 0,
+  phishing: 0,
+  safe: 0,
+  suspicious: 0,
+});
 
-  const logs = JSON.parse(localStorage.getItem("threatLogs")) || [];
+useEffect(() => {
+  fetch("http://127.0.0.1:5000/dashboard-stats")
+    .then((response) => response.json())
+    .then((data) => setStats(data))
+    .catch((error) => console.error("Error fetching stats:", error));
+}, []);
 
-  const totalScans = logs.length;
 
-  const phishingCount = logs.filter(
-    (log) => log.result === "PHISHING"
-  ).length;
-
-  const safeCount = logs.filter(
-    (log) => log.result === "SAFE"
-  ).length;
-
-  const suspiciousCount = logs.filter(
-    (log) => log.result === "SUSPICIOUS"
-  ).length;
 
   return (
     <div
@@ -58,7 +58,7 @@ function Dashboard() {
           }}
         >
           <h3>Threats Detected</h3>
-          <h2 style={{ color: "#ff4d4d" }}>{phishingCount}</h2>
+          <h2 style={{ color: "#ff4d4d" }}>{stats.phishing}</h2>
         </div>
 
         <div
@@ -70,7 +70,7 @@ function Dashboard() {
           }}
         >
           <h3>URLs Scanned</h3>
-          <h2 style={{ color: "#00bcd4" }}>{totalScans}</h2>
+          <h2 style={{ color: "#00bcd4" }}>{stats.total_scans}</h2>
         </div>
 
         <div
@@ -82,7 +82,7 @@ function Dashboard() {
           }}
         >
           <h3>Safe URLs</h3>
-          <h2 style={{ color: "#00ff7f" }}>{safeCount}</h2>
+          <h2 style={{ color: "#00ff7f" }}>{stats.safe}</h2>
         </div>
       </div>
 
@@ -139,7 +139,7 @@ function Dashboard() {
           }}
         >
           <h3>Total Scans</h3>
-          <h2 style={{ color: "#00bcd4" }}>{totalScans}</h2>
+          <h2 style={{ color: "#00bcd4" }}>{stats.total_scans}</h2>
         </div>
 
         <div
@@ -151,7 +151,7 @@ function Dashboard() {
           }}
         >
           <h3>Phishing URLs</h3>
-          <h2 style={{ color: "#ff4d4d" }}>{phishingCount}</h2>
+          <h2 style={{ color: "#ff4d4d" }}>{stats.phishing}</h2>
         </div>
 
         <div
@@ -163,7 +163,7 @@ function Dashboard() {
           }}
         >
           <h3>Safe URLs</h3>
-          <h2 style={{ color: "#00ff7f" }}>{safeCount}</h2>
+          <h2 style={{ color: "#00ff7f" }}>{stats.safe}</h2>
         </div>
 
         <div
@@ -175,17 +175,17 @@ function Dashboard() {
           }}
         >
           <h3>Suspicious URLs</h3>
-          <h2 style={{ color: "#ffb300" }}>{suspiciousCount}</h2>
+          <h2 style={{ color: "#ffb300" }}>{stats.suspicious}</h2>
         </div>
       </div>
       {/* Pie Chart */}
 
 <div style={{ marginTop: "40px" }}>
   <ThreatPieChart
-    safeCount={safeCount}
-    phishingCount={phishingCount}
-    suspiciousCount={suspiciousCount}
-  />
+  safeCount={stats.safe}
+  phishingCount={stats.phishing}
+  suspiciousCount={stats.suspicious}
+/>
 </div>
 
 {/* Navigation Buttons */}
